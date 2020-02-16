@@ -1,0 +1,13 @@
+{
+"index": 
+[
+    {
+        "wechat_id": "example_id",
+        "used_alias": ["example_alias1", "example_alias2"],
+        "used_avatars": ["data:image/png;base64,AAAA_plz_copy_from_extension_output"],
+        "evidence": ["issue url here", "PR url here", "etc,etc"],
+        "certainty_rating": 0,
+        "_comment": "increment certainty rating as needed"
+    }
+]
+}

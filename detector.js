@@ -38,7 +38,7 @@ for (var i = 1; i < users.length; i++) {
     cvs.height = avatar.height;
     cvs.getContext('2d').drawImage(avatar,0,0);
     console.log("Name: "+ name);
-    chrome.runtime.sendMessage({dummy:"lol",group: group_name, user:user, name:name.toString(), avatar: cvs}, function(response) {
+    chrome.runtime.sendMessage({dummy:"lol",group: group_name, user:user, name:name.toString(), avatar: cvs.toDataURL()}, function(response) {
     console.log(response.farewell);
     });
     

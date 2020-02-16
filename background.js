@@ -23,4 +23,3 @@ chrome.browserAction.onClicked.addListener(function (tab) {
 		file: 'detector.js'
 	});
 });
-

@@ -27,11 +27,20 @@ chrome.runtime.onMessage.addListener(
    console.log(request);
    
    var div = document.createElement('div');
-   div.style.top = 0;
-   div.style.right = 0;
    div.textContent = "Result for user: ";
    div.textContent += request.name;
+   div.textContent += "\n" + request.avatar;
    document.body.appendChild(div);
+   
+   const cvs = document.createElement('canvas');
+   var image = new Image();
+   image.src = request.avatar;
+   var ctx = cvs.getContext("2d");
+   image.onload = function() {
+    ctx.drawImage(image, 0, 0);
+    };
+   document.body.appendChild(image);
+
 
     if (request.dummy == "lol"){
         sendResponse({farewell: "ok"});
