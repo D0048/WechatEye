@@ -4,18 +4,26 @@
 
 'use strict';
 
-let page = document.getElementById('buttonDiv');
-const kButtonColors = ['#3aa757', '#e8453c', '#f9bb2d', '#4688f1'];
-function constructOptions(kButtonColors) {
-  for (let item of kButtonColors) {
-    let button = document.createElement('button');
-    button.style.backgroundColor = item;
-    button.addEventListener('click', function() {
-      chrome.storage.sync.set({color: item}, function() {
-        console.log('color is ' + item);
-      })
-    });
-    page.appendChild(button);
-  }
+let updateRepoButton = document.getElementById('repo_src_save');
+let updateRepoField = document.getElementById('repo_src');
+
+// Saves options to chrome.storage
+function save_options() {
+  chrome.storage.sync.set({
+    repo_src: updateRepoField.value
+  }, function() {
+  });
 }
-constructOptions(kButtonColors);
+
+// Restores select box and checkbox state using the preferences
+// stored in chrome.storage.
+function restore_options() {
+  chrome.storage.sync.get({
+    repo_src: "https://raw.githubusercontent.com/D0048/WechatEye/master/database/uiuc_blocklist.json"
+  }, function(items) {
+    updateRepoField.value = items.repo_src;
+  });
+}
+
+document.addEventListener('DOMContentLoaded', restore_options);
+updateRepoButton.addEventListener('click', save_options);

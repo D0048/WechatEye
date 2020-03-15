@@ -1,7 +1,3 @@
-// Copyright 2018 The Chromium Authors. All rights reserved.
-// Use of this source code is governed by a BSD-style license that can be
-// found in the LICENSE file.
-
 'use strict';
 var logger_elem = document.getElementById('log');
 var fetched_set = new Set()
@@ -45,15 +41,18 @@ chrome.runtime.onMessage.addListener(
 
 let updateRepoButton = document.getElementById('update');
 updateRepoButton.onclick = function(element) {
-    console.log("Updating");
-    $.getJSON("https://raw.githubusercontent.com/D0048/WechatEye/master/database/uiuc_blocklist.json",{"callback":"?"},
+    chrome.storage.sync.get({
+        repo_src: "https://raw.githubusercontent.com/D0048/WechatEye/master/database/uiuc_blocklist.json"
+    }, function(items) {
+        console.log("Updating from: "+items.repo_src);
+        $.getJSON(items.repo_src,{"callback":"?"},
               function(data, textStatus){
                   var div = document.createElement('div')
                   logger_elem.prepend(div)
                   div.textContent = "Database fetch done: "+textStatus+", "
                   
                   var idx = data.index
-                  div.textContent+=idx.length+" entries fetched: \n   { "
+                  div.textContent+=idx.length+" entries fetched from " + items.repo_src + " : \n   { "
                   for (var i = 0, len = idx.length; i < len; i++) {
                       div.textContent += idx[i].wechat_id;
                       div.textContent+=", ";
@@ -62,11 +61,10 @@ updateRepoButton.onclick = function(element) {
                   div.textContent+="}"
                   repo_data = data
               });
+    });
+    
 };
 updateRepoButton.onclick();
-
-
-
 
 let checkBtn = document.getElementById('check');
 checkBtn.onclick = function(element) {
@@ -86,7 +84,7 @@ checkBtn.onclick = function(element) {
         var idx = repo_data.index
         for (var i = 0, len = idx.length; i < len; i++) {
             var id2 = user.name
-            for (var j = 0, len2 = idx[i].used_alias.length; j < len1; j++) {
+            for (var j = 0, len2 = idx[i].used_alias.length; j < len2; j++) {
                 var id1 = idx[i].used_alias[j]
                 var sim = stringSimilarity.compareTwoStrings(id1,id2);
                 if(sim>max_sim){
