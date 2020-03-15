@@ -14,21 +14,21 @@
             "used_alias": ["wx_nosrf7d5q2ta22"],
             "used_avatars": ["N/A"],
             "evidence": ["https://github.com/D0048/WechatEye/issues/1"],
-            "certainty_rating": 1,
+            "certainty_rating": 1
         },
         {
             "wechat_id": "Unknown",
             "used_alias": ["诸葛大力"],
             "used_avatars": ["N/A"],
             "evidence": ["https://github.com/D0048/WechatEye/issues/1"],
-            "certainty_rating": 1,
+            "certainty_rating": 1
         },
         {
             "wechat_id": "Ying-Lian_2",
             "used_alias": ["Kiko."],
             "used_avatars": ["N/A"],
             "evidence": ["https://github.com/D0048/WechatEye/issues/2"],
-            "certainty_rating": 1,
+            "certainty_rating": 1
         }
     ],
     "_comment": "Internal testing blacklist for 代写s who actively providing academic cheating services in UIUC.",
