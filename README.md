@@ -12,6 +12,7 @@ A browser extension for filtering unwanted users from wechat groups.
 ## Contribution: UIUC Blacklist
 1. When a "代写" in the wild is found missing in the current community blacklist, create an issue following the generic addition template [here](https://github.com/D0048/WechatEye/issues/new?assignees=&labels=&template=add--insert-wechat-id-nickname-.md&title=).
 1. After creating the issue, create a pull-request by editing [this file](https://github.com/D0048/WechatEye/blob/repo/database/uiuc_blocklist.json), while sourcing the issue in the pull-request description.
+1. It is recommended to ensure modified json file is in correct format by copying it [here](https://jsonlint.com/)
 
 ### Json Blacklist format:
 ```json
