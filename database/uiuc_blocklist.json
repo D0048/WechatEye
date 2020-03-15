@@ -1,21 +1,36 @@
 {
-"index": 
-[
-    {
-        "wechat_id": "example_id",
-        "used_alias": ["example_alias1", "example_alias2"],
-        "used_avatars": ["data:image/png;base64,AAAA_plz_copy_from_extension_output"],
-        "evidence": ["issue url here", "PR url here", "etc."],
-        "certainty_rating": 1,
-        "_comment": "increment certainty rating as needed"
-    },
-    {
-        "wechat_id": "Unknown",
-        "certainty_rating": -999,
-        "used_alias": ["Ar"],
-        "_comment": "testing purposes only"
-    }
-],
-"_comment": "Internal testing blacklist for 代写s who actively providing academic cheating services in UIUC.",
-"_comment": "TODO: hash user information to protect privacy"
+    "index":
+    [
+        {
+            "wechat_id": "example_id",
+            "used_alias": ["example_alias1", "example_alias2"],
+            "used_avatars": ["data:image/png;base64,AAAA_plz_copy_from_extension_output"],
+            "evidence": ["issue url here", "PR url here", "etc."],
+            "certainty_rating": 1,
+            "_comment": "increment certainty rating as needed"
+        },
+        {
+            "wechat_id": "wx_nosrf7d5q2ta22",
+            "used_alias": ["wx_nosrf7d5q2ta22"],
+            "used_avatars": ["N/A"],
+            "evidence": ["https://github.com/D0048/WechatEye/issues/1"],
+            "certainty_rating": 1,
+        },
+        {
+            "wechat_id": "Unknown",
+            "used_alias": ["诸葛大力"],
+            "used_avatars": ["N/A"],
+            "evidence": ["https://github.com/D0048/WechatEye/issues/1"],
+            "certainty_rating": 1,
+        },
+        {
+            "wechat_id": "Ying-Lian_2",
+            "used_alias": ["Kiko."],
+            "used_avatars": ["N/A"],
+            "evidence": ["https://github.com/D0048/WechatEye/issues/2"],
+            "certainty_rating": 1,
+        }
+    ],
+    "_comment": "Internal testing blacklist for 代写s who actively providing academic cheating services in UIUC.",
+    "_comment": "TODO: hash user information to protect privacy"
 }
