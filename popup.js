@@ -43,7 +43,7 @@ chrome.runtime.onMessage.addListener(
         }
     });
 
-let updateRepoButton = document.getElementById('control').querySelector("#update");
+let updateRepoButton = document.getElementById('update');
 updateRepoButton.onclick = function(element) {
     console.log("Updating");
     $.getJSON("https://raw.githubusercontent.com/D0048/WechatEye/master/database/uiuc_blocklist.json",{"callback":"?"},
@@ -66,13 +66,44 @@ updateRepoButton.onclick = function(element) {
 updateRepoButton.onclick();
 
 
-let checkBtn = document.getElementById('control').querySelector("#check");
-updateRepoButton.onclick = function(element) {
-    if(repo_data==null)updateRepoButton.onclick();/*
-        const recovered_set = [fetched_set].map(item) => {
-        if (typeof item === 'string') return JSON.parse(item);
-        else if (typeof item === 'object') return item;
-});*/
 
+
+let checkBtn = document.getElementById('check');
+checkBtn.onclick = function(element) {
+    if(repo_data==null){updateRepoButton.onclick();}
+    if(fetched_set.size==0){fetchBtn.onclick();}
+    
+    var div = document.createElement('div');
+    logger_elem.prepend(div);
+    div.textContent += "Checking: \n";
+    
+    fetched_set.forEach(async(jsonstr) =>{
+        var div = document.createElement('div');
+        logger_elem.prepend(div);
+        var user = JSON.parse(jsonstr);
+        
+        var max_sim=-1, max_obj="{Not found}", cutoff=0.8
+        var idx = repo_data.index
+        for (var i = 0, len = idx.length; i < len; i++) {
+            var id1 = idx[i].wechat_id
+            var id2 = user.name
+            var sim = stringSimilarity.compareTwoStrings(id1,id2);
+            if(sim>max_sim){
+                max_sim=sim
+                max_obj=JSON.stringify(idx[i])
+            }
+        }
+        if(max_sim>cutoff){
+            div = document.createElement('div');
+            logger_elem.prepend(div);
+            div.textContent += user.name + " :";
+            div.textContent += "Result(final_certainty = "+max_sim*JSON.parse(max_obj).certainty_rating+ "): ";
+            div = document.createElement('div');
+            logger_elem.prepend(div);
+            div.textContent += "Matching: " + max_obj;
+        }
+    })
+    
+    
 }
 
