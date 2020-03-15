@@ -29,6 +29,48 @@
             "used_avatars": ["N/A"],
             "evidence": ["https://github.com/D0048/WechatEye/issues/2"],
             "certainty_rating": 1
+        },
+        {
+            "wechat_id": "Unknown",
+            "used_alias": ["A岭岭"],
+            "used_avatars": ["N/A"],
+            "evidence": ["https://github.com/D0048/WechatEye/issues/3"],
+            "certainty_rating": 1
+        },
+        {
+            "wechat_id": "mcliu159357",
+            "used_alias": ["阿茶@"],
+            "used_avatars": ["N/A"],
+            "evidence": ["https://github.com/D0048/WechatEye/issues/3"],
+            "certainty_rating": 1
+        },
+        {
+            "wechat_id": "wo30434",
+            "used_alias": ["Chloe"],
+            "used_avatars": ["N/A"],
+            "evidence": ["https://github.com/D0048/WechatEye/issues/3"],
+            "certainty_rating": 1
+        },
+        {
+            "wechat_id": "manshurui",
+            "used_alias": ["陌上花开"],
+            "used_avatars": ["N/A"],
+            "evidence": ["https://github.com/D0048/WechatEye/issues/3"],
+            "certainty_rating": 1
+        },
+        {
+            "wechat_id": "imanliuxin123",
+            "used_alias": ["欣欣"],
+            "used_avatars": ["N/A"],
+            "evidence": ["https://github.com/D0048/WechatEye/issues/3"],
+            "certainty_rating": 1
+        },
+        {
+            "wechat_id": "q1215295",
+            "used_alias": ["至夏风轻伤"],
+            "used_avatars": ["N/A"],
+            "evidence": ["https://github.com/D0048/WechatEye/issues/3"],
+            "certainty_rating": 1
         }
     ],
     "_comment": "Internal testing blacklist for 代写s who actively providing academic cheating services in UIUC.",
