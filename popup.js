@@ -46,20 +46,21 @@ updateRepoButton.onclick = function(element) {
     }, function(items) {
         console.log("Updating from: "+items.repo_src);
         $.getJSON(items.repo_src,{"callback":"?"},
-              function(data, textStatus){
-                  var div = document.createElement('div')
-                  logger_elem.prepend(div)
-                  div.textContent = "Database fetch done: "+textStatus+"\n"
-                  
-                  var idx = data.index
-                  div.textContent+=idx.length+" entries fetched from " + items.repo_src + ": {\n"
-                  for (var i = 0, len = idx.length; i < len; i++) {
-                      div.textContent += idx[i].wechat_id;
-                      div.textContent+=", ";
-                  }
-                  div.textContent+="}\n"
-                  repo_data = data
-              });
+                  function(data, textStatus){
+                      console.log("Database fetch done: "+textStatus+"\n")
+                      var div = document.createElement('div')
+                      logger_elem.prepend(div)
+                      div.textContent = "Database fetch done: "+textStatus+"\n"
+                      
+                      var idx = data.index
+                      div.textContent+=idx.length+" entries fetched from " + items.repo_src + ": {\n"
+                      for (var i = 0, len = idx.length; i < len; i++) {
+                          div.textContent += idx[i].wechat_id;
+                          div.textContent+=", ";
+                      }
+                      div.textContent+="}\n"
+                      repo_data = data
+                  });
     });
     
 };
