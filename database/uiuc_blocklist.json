@@ -10,8 +10,9 @@
         "_comment": "increment certainty rating as needed"
     },
     {
-        "wechat_id": "Ar",
+        "wechat_id": "Unknown",
         "certainty_rating": -999,
+        "used_alias": ["Ar"],
         "_comment": "testing purposes only"
     }
 ],

@@ -85,12 +85,14 @@ checkBtn.onclick = function(element) {
         var max_sim=-1, max_obj="{Not found}", cutoff=0.8
         var idx = repo_data.index
         for (var i = 0, len = idx.length; i < len; i++) {
-            var id1 = idx[i].wechat_id
             var id2 = user.name
-            var sim = stringSimilarity.compareTwoStrings(id1,id2);
-            if(sim>max_sim){
-                max_sim=sim
-                max_obj=JSON.stringify(idx[i])
+            for (var j = 0, len2 = idx[i].used_alias.length; j < len1; j++) {
+                var id1 = idx[i].used_alias[j]
+                var sim = stringSimilarity.compareTwoStrings(id1,id2);
+                if(sim>max_sim){
+                    max_sim = sim
+                    max_obj = JSON.stringify(idx[i])
+                }
             }
         }
         if(max_sim>cutoff){
