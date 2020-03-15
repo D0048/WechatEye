@@ -3,34 +3,30 @@
 // found in the LICENSE file.
 
 'use strict';
+var logger_elem = document.getElementById('log');
+var fetched_set = new Set()
+var repo_data = null;
 
-let changeColor = document.getElementById('changeColor');
-changeColor.onclick = function(element) {
+let fetchBtn = document.getElementById('fetch_user_');
+fetchBtn.onclick = function(element) {
     chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
         chrome.tabs.executeScript(tabs[0].id, {
             file: 'detector.js'
         });
     });
 };
-
-let updateRepoButton = document.getElementById('update');
-updateRepoButton.onclick = function(element) {
-    $.getJSON("https://raw.githubusercontent.com/D0048/WechatEye/master/database/uiuc_blocklist.json",{"callback":"?"},function(data, textStatus){ console.log(data)});
-};
-
 chrome.runtime.onMessage.addListener(
     function(request, sender, sendResponse) {
-        console.log(sender.tab ?
-        "from a content script:" + sender.tab.url :
-        "from the extension");
-        console.log(request);
+        var fetched_obj = {};
         
+        fetched_obj["name"] = request.name;
         var div = document.createElement('div');
-        div.textContent = "Result for user: ";
+        div.textContent = "Nickname: ";
         div.textContent += request.name;
-        div.textContent += "\n" + request.avatar;
-        document.body.appendChild(div);
+        div.textContent += "\nAvatar:" + request.avatar;
+        logger_elem.prepend(div);
         
+        fetched_obj["avatar"] = request.avatar.toString();
         const cvs = document.createElement('canvas');
         var image = new Image();
         image.src = request.avatar;
@@ -38,10 +34,45 @@ chrome.runtime.onMessage.addListener(
         image.onload = function() {
             ctx.drawImage(image, 0, 0);
         };
-        document.body.appendChild(image);
+        logger_elem.prepend(image);
         
+        fetched_set.add(JSON.stringify(fetched_obj))
         
         if (request.dummy == "lol"){
             sendResponse({farewell: "ok"});
         }
     });
+
+let updateRepoButton = document.getElementById('control').querySelector("#update");
+updateRepoButton.onclick = function(element) {
+    console.log("Updating");
+    $.getJSON("https://raw.githubusercontent.com/D0048/WechatEye/master/database/uiuc_blocklist.json",{"callback":"?"},
+              function(data, textStatus){
+                  var div = document.createElement('div')
+                  logger_elem.prepend(div)
+                  div.textContent = "Database fetch done: "+textStatus+", "
+                  
+                  var idx = data.index
+                  div.textContent+=idx.length+" entries fetched: \n   { "
+                  for (var i = 0, len = idx.length; i < len; i++) {
+                      div.textContent += idx[i].wechat_id;
+                      div.textContent+=", ";
+                  }
+                  
+                  div.textContent+="}"
+                  repo_data = data
+              });
+};
+updateRepoButton.onclick();
+
+
+let checkBtn = document.getElementById('control').querySelector("#check");
+updateRepoButton.onclick = function(element) {
+    if(repo_data==null)updateRepoButton.onclick();/*
+        const recovered_set = [fetched_set].map(item) => {
+        if (typeof item === 'string') return JSON.parse(item);
+        else if (typeof item === 'object') return item;
+});*/
+
+}
+
