@@ -49,16 +49,15 @@ updateRepoButton.onclick = function(element) {
               function(data, textStatus){
                   var div = document.createElement('div')
                   logger_elem.prepend(div)
-                  div.textContent = "Database fetch done: "+textStatus+", "
+                  div.textContent = "Database fetch done: "+textStatus+"\n"
                   
                   var idx = data.index
-                  div.textContent+=idx.length+" entries fetched from " + items.repo_src + " : \n   { "
+                  div.textContent+=idx.length+" entries fetched from " + items.repo_src + ": {\n"
                   for (var i = 0, len = idx.length; i < len; i++) {
                       div.textContent += idx[i].wechat_id;
                       div.textContent+=", ";
                   }
-                  
-                  div.textContent+="}"
+                  div.textContent+="}\n"
                   repo_data = data
               });
     });
@@ -89,18 +88,22 @@ checkBtn.onclick = function(element) {
                 var sim = stringSimilarity.compareTwoStrings(id1,id2);
                 if(sim>max_sim){
                     max_sim = sim
-                    max_obj = JSON.stringify(idx[i])
+                    max_obj = JSON.stringify(idx[i], null, 1)
                 }
             }
         }
         if(max_sim>cutoff){
             div = document.createElement('div');
             logger_elem.prepend(div);
-            div.textContent += user.name + " :";
-            div.textContent += "Result(final_certainty = "+max_sim*JSON.parse(max_obj).certainty_rating+ "): ";
+            div.style.color = "Red";
+            div.style.fontSize = "large";
+            div.textContent += user.name + ": ";
+            div.textContent += "(final_certainty = "+max_sim*JSON.parse(max_obj).certainty_rating+ ") ";
             div = document.createElement('div');
             logger_elem.prepend(div);
-            div.textContent += "Matching: " + max_obj;
+            div.style.color = "Red";
+            div.style.fontSize = "large";
+            div.textContent += "Matching with: " + max_obj;
         }
     })
     
