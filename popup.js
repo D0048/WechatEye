@@ -42,7 +42,7 @@ chrome.runtime.onMessage.addListener(
 let updateRepoButton = document.getElementById('update');
 updateRepoButton.onclick = function(element) {
     chrome.storage.sync.get({
-        repo_src: "https://raw.githubusercontent.com/D0048/WechatEye/master/database/uiuc_blocklist.json"
+        repo_src: "https://raw.githubusercontent.com/D0048/WechatEye/repo/database/uiuc_blocklist.json"
     }, function(items) {
         console.log("Updating from: "+items.repo_src);
         $.getJSON(items.repo_src,{"callback":"?"},

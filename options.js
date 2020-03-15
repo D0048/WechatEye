@@ -19,7 +19,7 @@ function save_options() {
 // stored in chrome.storage.
 function restore_options() {
   chrome.storage.sync.get({
-    repo_src: "https://raw.githubusercontent.com/D0048/WechatEye/master/database/uiuc_blocklist.json"
+    repo_src: "https://raw.githubusercontent.com/D0048/WechatEye/repo/database/uiuc_blocklist.json"
   }, function(items) {
     updateRepoField.value = items.repo_src;
   });
