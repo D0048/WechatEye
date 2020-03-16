@@ -73,7 +73,7 @@ checkBtn.onclick = function(element) {
     
     var div = document.createElement('div');
     logger_elem.prepend(div);
-    div.textContent += "Checking: \n";
+    div.textContent += "Checking(no result displayed means no result found): \n";
     
     fetched_set.forEach(async(jsonstr) =>{
         var div = document.createElement('div');
@@ -94,17 +94,26 @@ checkBtn.onclick = function(element) {
             }
         }
         if(max_sim>cutoff){
+            var final_certainty=max_sim*JSON.parse(max_obj).certainty_rating
             div = document.createElement('div');
             logger_elem.prepend(div);
             div.style.color = "Red";
             div.style.fontSize = "large";
             div.textContent += user.name + ": ";
-            div.textContent += "(final_certainty = "+max_sim*JSON.parse(max_obj).certainty_rating+ ") ";
+            div.textContent += "(final_certainty = "+final_certainty+ ") ";
             div = document.createElement('div');
             logger_elem.prepend(div);
             div.style.color = "Red";
             div.style.fontSize = "large";
             div.textContent += "Matching with: " + max_obj;
+            
+            div = document.createElement('div');
+            logger_elem.prepend(div);
+            div.textContent += "Template Response: \n"
+            div.textContent += "[WechatEye] 用户昵称为 <"+user.name+"> 的用户有 "+(final_certainty*100)+"\% 的概率是代写，原因详细见：\n"
+            for (var i = 0, len = JSON.parse(max_obj).evidence.length; i < len; i++) {
+                div.textContent += "- "+JSON.parse(max_obj).evidence[i]+"\n"
+            }
         }
     })
     
